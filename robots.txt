@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://crypto-dca-calculator.alharbimohammad1992.workers.dev/sitemap.xml
+Sitemap: https://cryptodcacalculator.com/sitemap.xml
