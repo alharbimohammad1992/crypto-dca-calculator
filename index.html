@@ -49,7 +49,7 @@
     {
       "@type": "Question",
       "name": "Is dollar-cost averaging better than lump sum?",
-      "acceptedAnswer": { "@type": "Answer", "text": "It depends on the period. Lump sum often wins in strong, steady uptrends because the money is exposed longer. DCA tends to reduce risk and outperform during volatile or sideways markets." }
+      "acceptedAnswer": { "@type": "Answer", "text": "It depends on the period. Lump sum often wins in strong, steady uptrends because the money is exposed longer. DCA tends to reduce risk and outperform during volatile or sideways markets. The calculator shows which one would have won for the exact date range you choose." }
     },
     {
       "@type": "Question",
@@ -58,8 +58,23 @@
     },
     {
       "@type": "Question",
+      "name": "How far back does the historical data go?",
+      "acceptedAnswer": { "@type": "Answer", "text": "As far back as Binance has data for each coin — Bitcoin goes back to 2017, Ethereum to 2017 as well, Solana to 2020, and so on. If you enter a start date before a coin's listing, the calculator automatically adjusts to the earliest available date." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the calculator include trading fees?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. The results show gross returns based on price alone. Most spot exchanges charge 0.1% per trade or less. To estimate the impact, subtract approximately 0.1–0.2% from your total ROI per year of daily buying." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the best coin to DCA into?",
+      "acceptedAnswer": { "@type": "Answer", "text": "This depends on your risk tolerance. Bitcoin is the most common DCA target due to its dominance and historically strong recovery after drawdowns. Ethereum is a popular second choice. Altcoins can produce higher returns in bull markets but carry greater downside risk." }
+    },
+    {
+      "@type": "Question",
       "name": "Is this financial advice?",
-      "acceptedAnswer": { "@type": "Answer", "text": "No. This is an educational backtesting tool. Past performance does not guarantee future results." }
+      "acceptedAnswer": { "@type": "Answer", "text": "No. This is an educational backtesting tool. Past performance does not guarantee future results. Always do your own research before investing." }
     }
   ]
 }
@@ -282,10 +297,25 @@
     <h2>How to use this calculator</h2>
     <p>Pick a coin, set how much you invest each period and how often, then choose a start and end date. Hit <b>Run Backtest</b> and you'll get your total invested, what the position would be worth today, your profit or loss, ROI, a portfolio growth chart, and a side-by-side comparison against investing the same total as a single lump sum at the start.</p>
 
+    <h2>Why use DCA in crypto?</h2>
+    <p>Crypto markets are among the most volatile in the world — Bitcoin alone has dropped more than 80% from its peak on multiple occasions, only to recover and reach new highs. Trying to pick the "perfect" entry is notoriously difficult even for professionals. DCA sidesteps this problem entirely: because you invest the same dollar amount every period, price swings work in your favor — a crash means your next buy picks up more coins, and a rally boosts the coins you already hold.</p>
+    <p>The psychological benefit is just as important. A written plan with a fixed schedule removes the temptation to panic-sell during drawdowns or FOMO-buy at the top. Consistently following the strategy — through bull markets and bear markets alike — is what separates long-term DCA gains from the typical retail experience of buying high and selling low.</p>
+
+    <h2>Daily vs weekly vs monthly — which is best?</h2>
+    <p>The honest answer is that the difference between frequencies is smaller than most people expect, because they all achieve the same core goal: spreading your cost basis over time. That said, there are practical trade-offs:</p>
+    <p><b>Daily</b> gives the smoothest averaging and is best for highly volatile assets or large position sizes where timing risk is a real concern. The downside is that exchange fees can compound quickly if you're paying per trade.</p>
+    <p><b>Weekly</b> is the sweet spot for most individual investors. It's frequent enough to catch meaningful price swings, but fee-efficient and easy to maintain as a habit. Most DCA practitioners who run backtests find weekly and daily results to be very close.</p>
+    <p><b>Monthly</b> aligns naturally with a paycheck cycle, making it practical for people investing a portion of their salary. It requires the least maintenance and works best when the investment horizon is three years or longer, since the averaging effect needs time to smooth out large one-time price moves.</p>
+    <p>Use the frequency buttons above to backtest all three on the same date range — the comparison often surprises people.</p>
+
     <div class="faq">
       <div><h3>Is dollar-cost averaging better than lump sum?</h3><p>It depends on the period. Lump sum often wins in strong, steady uptrends because the money is exposed longer. DCA tends to reduce risk and outperform during volatile or sideways markets. The comparison above shows which one would have won for the exact range you chose.</p></div>
       <div><h3>Where does the price data come from?</h3><p>Historical and current daily prices are fetched live from Binance public market data, covering full history back to each coin's listing. Results are estimates and do not include exchange fees or taxes.</p></div>
-      <div><h3>Is this financial advice?</h3><p>No. This is an educational backtesting tool. Past performance does not guarantee future results.</p></div>
+      <div><h3>How far back does the historical data go?</h3><p>As far back as Binance has data for each coin — Bitcoin goes back to 2017, Ethereum to 2017 as well, Solana to 2020, and so on. If you enter a start date before a coin's listing, the calculator automatically adjusts to the earliest available date and tells you.</p></div>
+      <div><h3>Does the calculator include trading fees?</h3><p>No. The results show gross returns based on price alone. In practice, most spot exchanges charge 0.1% per trade or less, which has a small but real effect on long-term returns — especially for daily DCA. To estimate the impact, subtract approximately 0.1–0.2% from your total ROI per year of daily buying.</p></div>
+      <div><h3>What is the best coin to DCA into?</h3><p>This is a personal decision that depends on your risk tolerance and conviction. Bitcoin is the most common DCA target due to its market dominance, longer history, and historically strong recovery after drawdowns. Ethereum is a popular second choice. Altcoins can produce higher returns in bull markets but also carry greater downside risk in bear markets. Backtesting several coins over the same period with this calculator is a useful way to compare historical outcomes.</p></div>
+      <div><h3>Can I DCA out (sell gradually) as well?</h3><p>The strategy works in reverse too — selling a fixed amount on a schedule is called dollar-cost averaging out, and it's a disciplined way to take profit without trying to call the top. This calculator focuses on the buy side, but the same logic applies.</p></div>
+      <div><h3>Is this financial advice?</h3><p>No. This is an educational backtesting tool. Past performance does not guarantee future results. Always do your own research before investing.</p></div>
     </div>
   </article>
 
