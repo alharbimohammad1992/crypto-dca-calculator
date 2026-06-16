@@ -218,6 +218,20 @@
   .profit-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
   @media(max-width:640px){.profit-stats{grid-template-columns:repeat(2,1fr)}}
 
+  /* future table */
+  .future-table{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:4px}
+  .future-row{display:grid;grid-template-columns:1.4fr 1fr 1.2fr 1fr;gap:0;padding:13px 16px;font-size:14px;border-bottom:1px solid var(--line)}
+  .future-row:last-child{border-bottom:none}
+  .future-row.header{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;background:#0a1120}
+  .future-row.bear span:last-child{color:#8da3c7}
+  .future-row.base span:last-child{color:var(--accent)}
+  .future-row.bull span:last-child{color:#34d6ff}
+  .future-row span:nth-child(3),.future-row span:nth-child(4){font-family:var(--mono);font-weight:600}
+  @media(max-width:640px){
+    .future-row{grid-template-columns:1.2fr 0fr 1fr 1fr;font-size:12px}
+    .future-row span:nth-child(2){display:none}
+  }
+
   .binance-cta{
     display:flex;align-items:center;gap:10px;justify-content:center;
     margin-top:18px;padding:15px;border-radius:13px;
@@ -248,6 +262,7 @@
     <div class="tabs">
       <button class="tab-btn on" data-tab="dca">📈 DCA Calculator</button>
       <button class="tab-btn" data-tab="profit">💰 Profit Calculator</button>
+      <button class="tab-btn" data-tab="future">🔮 Future Value</button>
     </div>
 
     <!-- DCA TAB -->
@@ -363,6 +378,64 @@
         </a>
       </div>
     </div><!-- end tab-profit -->
+
+    <!-- FUTURE TAB -->
+    <div class="tab-panel" id="tab-future">
+      <div class="grid">
+        <div class="field">
+          <label for="f-coin">Cryptocurrency</label>
+          <select id="f-coin">
+            <option value="bitcoin">Bitcoin (BTC)</option>
+            <option value="ethereum">Ethereum (ETH)</option>
+            <option value="solana">Solana (SOL)</option>
+            <option value="binancecoin">BNB (BNB)</option>
+            <option value="ripple">XRP (XRP)</option>
+            <option value="cardano">Cardano (ADA)</option>
+            <option value="dogecoin">Dogecoin (DOGE)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-amount">Amount to invest (USD)</label>
+          <input id="f-amount" type="text" inputmode="decimal" value="1000" dir="ltr">
+        </div>
+        <div class="field full">
+          <label for="f-years">Time horizon (years)</label>
+          <div class="freq" id="f-years-btns">
+            <button data-y="1">1 yr</button>
+            <button data-y="3">3 yrs</button>
+            <button data-y="5" class="on">5 yrs</button>
+            <button data-y="10">10 yrs</button>
+          </div>
+        </div>
+      </div>
+      <button class="cta" id="f-run">Calculate Future Value →</button>
+      <div class="msg" id="f-msg"></div>
+
+      <div id="f-results" style="display:none;animation:rise .5s ease both">
+        <p style="font-size:13px;color:var(--muted);margin:16px 0 12px">Based on historical annual growth rates. <b style="color:var(--text)">Not financial advice.</b> Past performance ≠ future results.</p>
+        <div class="future-table">
+          <div class="future-row header">
+            <span>Scenario</span><span>Annual return</span><span>Value in <span id="f-yr-label">5</span> yrs</span><span>Profit</span>
+          </div>
+          <div class="future-row bear">
+            <span>🐻 Conservative</span><span>+20%/yr</span><span id="f-bear-val">—</span><span id="f-bear-pct">—</span>
+          </div>
+          <div class="future-row base">
+            <span>📊 Moderate</span><span>+50%/yr</span><span id="f-base-val">—</span><span id="f-base-pct">—</span>
+          </div>
+          <div class="future-row bull">
+            <span>🚀 Optimistic</span><span>+100%/yr</span><span id="f-bull-val">—</span><span id="f-bull-pct">—</span>
+          </div>
+        </div>
+        <div class="chartwrap" style="margin-top:16px">
+          <canvas id="f-chart" height="200"></canvas>
+        </div>
+        <a href="https://www.binance.com/register?ref=392703655&utm_medium=web_share_copy" target="_blank" rel="noopener" class="binance-cta" style="margin-top:18px">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L6 7.5 8.5 10 12 6.5 15.5 10 18 7.5 12 2Z" fill="#F0B90B"/><path d="M2 12L4.5 9.5 7 12 4.5 14.5 2 12Z" fill="#F0B90B"/><path d="M12 22L6 16.5 8.5 14 12 17.5 15.5 14 18 16.5 12 22Z" fill="#F0B90B"/><path d="M12 9L9 12 12 15 15 12 12 9Z" fill="#F0B90B"/></svg>
+          Start investing today — Open a free Binance account →
+        </a>
+      </div>
+    </div><!-- end tab-future -->
 
   </section>
 
@@ -638,6 +711,99 @@ async function runProfit(){
     msg.textContent=err.message;
   }finally{
     btn.disabled=false; btn.textContent='Calculate Profit →';
+  }
+}
+
+// future calculator
+let fYears = 5;
+$('#f-years-btns').addEventListener('click', e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  [...$('#f-years-btns').children].forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); fYears=parseInt(b.dataset.y);
+  $('#f-yr-label').textContent=fYears;
+});
+
+$('#f-run').addEventListener('click', runFuture);
+
+async function runFuture(){
+  const msg=$('#f-msg'); msg.style.color='var(--loss)'; msg.textContent='';
+  const amount=parseFloat(toLatin($('#f-amount').value).replace(/[^0-9.]/g,''));
+  const coin=$('#f-coin').value;
+  if(!amount||amount<=0){msg.textContent='Enter a valid amount.';return;}
+
+  const btn=$('#f-run'); btn.disabled=true; btn.textContent='Fetching current price…';
+  try{
+    const nowMs=Date.now();
+    const weekAgo=nowMs-7*86400000;
+    const prices=await fetchPrices(coin, weekAgo, nowMs);
+    const curPrice=prices[prices.length-1][1];
+
+    const scenarios=[
+      {rate:0.20, el1:'#f-bear-val', el2:'#f-bear-pct'},
+      {rate:0.50, el1:'#f-base-val', el2:'#f-base-pct'},
+      {rate:1.00, el1:'#f-bull-val', el2:'#f-bull-pct'},
+    ];
+    const coins=amount/curPrice;
+    scenarios.forEach(s=>{
+      const futurePrice=curPrice*Math.pow(1+s.rate, fYears);
+      const futureVal=coins*futurePrice;
+      const profit=futureVal-amount;
+      $(s.el1).textContent=fmtUSD(futureVal);
+      $(s.el2).textContent='+'+fmtPct((profit/amount)*100).replace('+','');
+    });
+
+    $('#f-yr-label').textContent=fYears;
+    drawFutureChart(amount, curPrice, coins, fYears);
+    $('#f-results').style.display='block';
+    $('#f-results').scrollIntoView({behavior:'smooth',block:'nearest'});
+  }catch(err){
+    msg.textContent=err.message;
+  }finally{
+    btn.disabled=false; btn.textContent='Calculate Future Value →';
+  }
+}
+
+function drawFutureChart(amount, curPrice, coins, years){
+  const cv=$('#f-chart'), ctx=cv.getContext('2d');
+  const dpr=window.devicePixelRatio||1;
+  const W=cv.clientWidth, H=200;
+  cv.width=W*dpr; cv.height=H*dpr; ctx.scale(dpr,dpr);
+  ctx.clearRect(0,0,W,H);
+  const padL=8,padR=8,padT=14,padB=22;
+  const x0=padL,x1=W-padR,y0=padT,y1=H-padB;
+
+  const rates=[0.20,0.50,1.00];
+  const colors=['#6b7da3','#00e08a','#34d6ff'];
+  const pts=years+1;
+  const allVals=rates.flatMap(r=>Array.from({length:pts},(_,i)=>coins*curPrice*Math.pow(1+r,i)));
+  const vMax=Math.max(...allVals)*1.08, vMin=0;
+  const sx=i=>x0+i/(pts-1)*(x1-x0);
+  const sy=v=>y1-(v-vMin)/(vMax-vMin)*(y1-y0);
+
+  // grid
+  ctx.strokeStyle='rgba(120,150,200,.10)'; ctx.lineWidth=1;
+  ctx.font='11px IBM Plex Mono'; ctx.fillStyle='#5f7298';
+  for(let i=0;i<=3;i++){
+    const v=vMax*i/3, y=sy(v);
+    ctx.beginPath();ctx.moveTo(x0,y);ctx.lineTo(x1,y);ctx.stroke();
+    ctx.fillText('$'+(v>=1000?(v/1000).toFixed(0)+'k':v.toFixed(0)),x0+2,y-4);
+  }
+
+  rates.forEach((r,ri)=>{
+    ctx.setLineDash([]);
+    ctx.beginPath();
+    for(let i=0;i<pts;i++){
+      const v=coins*curPrice*Math.pow(1+r,i);
+      i?ctx.lineTo(sx(i),sy(v)):ctx.moveTo(sx(i),sy(v));
+    }
+    ctx.lineWidth=2.2; ctx.strokeStyle=colors[ri]; ctx.stroke();
+  });
+
+  // x labels
+  ctx.fillStyle='#5f7298'; ctx.font='11px IBM Plex Mono';
+  for(let i=0;i<=years;i++){
+    const yr=new Date().getFullYear()+i;
+    ctx.fillText(yr,sx(i)-14,y1+14);
   }
 }
 
