@@ -509,6 +509,9 @@ function drawChart(curve){
   line('invested','#6b7da3',false,[5,4]);
   line('value','#00e08a',true);
 }
+
+// auto-run on load with default scenario (BTC weekly from 2021)
+window.addEventListener('load', () => { run(); });
 </script>
 </body>
 </html>
