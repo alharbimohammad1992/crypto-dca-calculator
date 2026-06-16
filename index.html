@@ -222,14 +222,14 @@
   .future-table{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:4px}
   .future-row{display:grid;grid-template-columns:1.4fr 1fr 1.2fr 1fr;gap:0;padding:13px 16px;font-size:14px;border-bottom:1px solid var(--line)}
   .future-row:last-child{border-bottom:none}
-  .future-row.header{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;background:#0a1120}
-  .future-row.bear span:last-child{color:#8da3c7}
-  .future-row.base span:last-child{color:var(--accent)}
-  .future-row.bull span:last-child{color:#34d6ff}
-  .future-row span:nth-child(3),.future-row span:nth-child(4){font-family:var(--mono);font-weight:600}
+  .future-row.header{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;background:#0a1120}
+  .future-row.bear .fv{color:#8da3c7}
+  .future-row.base .fv{color:var(--accent)}
+  .future-row.bull .fv{color:#34d6ff}
+  .future-row .fval,.future-row .fv{font-family:var(--mono);font-weight:600}
   @media(max-width:640px){
-    .future-row{grid-template-columns:1.2fr 0fr 1fr 1fr;font-size:12px}
-    .future-row span:nth-child(2){display:none}
+    .future-row{grid-template-columns:1.3fr 1fr 1fr;font-size:12px}
+    .future-row .fann{display:none}
   }
 
   .binance-cta{
@@ -415,16 +415,16 @@
         <p style="font-size:13px;color:var(--muted);margin:16px 0 12px">Based on historical annual growth rates. <b style="color:var(--text)">Not financial advice.</b> Past performance ≠ future results.</p>
         <div class="future-table">
           <div class="future-row header">
-            <span>Scenario</span><span>Annual return</span><span>Value in <span id="f-yr-label">5</span> yrs</span><span>Profit</span>
+            <span>Scenario</span><span class="fann">Annual return</span><span>Value in <span id="f-yr-label">5</span> yrs</span><span>Profit</span>
           </div>
           <div class="future-row bear">
-            <span>🐻 Conservative</span><span>+20%/yr</span><span id="f-bear-val">—</span><span id="f-bear-pct">—</span>
+            <span>🐻 Conservative</span><span class="fann">+20%/yr</span><span class="fval" id="f-bear-val">—</span><span class="fv" id="f-bear-pct">—</span>
           </div>
           <div class="future-row base">
-            <span>📊 Moderate</span><span>+50%/yr</span><span id="f-base-val">—</span><span id="f-base-pct">—</span>
+            <span>📊 Moderate</span><span class="fann">+50%/yr</span><span class="fval" id="f-base-val">—</span><span class="fv" id="f-base-pct">—</span>
           </div>
           <div class="future-row bull">
-            <span>🚀 Optimistic</span><span>+100%/yr</span><span id="f-bull-val">—</span><span id="f-bull-pct">—</span>
+            <span>🚀 Optimistic</span><span class="fann">+100%/yr</span><span class="fval" id="f-bull-val">—</span><span class="fv" id="f-bull-pct">—</span>
           </div>
         </div>
         <div class="chartwrap" style="margin-top:16px">
@@ -753,8 +753,8 @@ async function runFuture(){
     });
 
     $('#f-yr-label').textContent=fYears;
-    drawFutureChart(amount, curPrice, coins, fYears);
     $('#f-results').style.display='block';
+    requestAnimationFrame(()=>drawFutureChart(amount, curPrice, coins, fYears));
     $('#f-results').scrollIntoView({behavior:'smooth',block:'nearest'});
   }catch(err){
     msg.textContent=err.message;
