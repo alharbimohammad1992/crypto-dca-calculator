@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ethereum DCA Calculator — Backtest ETH Dollar-Cost Averaging</title>
+<meta name="description" content="Calculate exactly how much your Ethereum DCA strategy would have returned. Enter any amount, frequency, and date range — see real ETH historical results instantly.">
+<link rel="canonical" href="https://cryptodcacalculator.com/ethereum-dca-calculator/">
+<meta property="og:title" content="Ethereum DCA Calculator">
+<meta property="og:description" content="Backtest any Ethereum dollar-cost averaging strategy with real Binance price data.">
+<meta property="og:url" content="https://cryptodcacalculator.com/ethereum-dca-calculator/">
+<meta property="og:type" content="website">
+<link rel="icon" href="/og-image.png" type="image/png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q37F2112N1"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-Q37F2112N1');</script>
+<style>
+  :root{--bg:#07101f;--card:#0d1b2e;--text:#e8edf5;--muted:#5f7298;--accent:#3b82f6;--line:rgba(255,255,255,.09);--sans:system-ui,-apple-system,sans-serif}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  .header{text-align:center;padding:48px 20px 32px;border-bottom:1px solid var(--line)}
+  .header a.back{font-size:13px;color:var(--muted);display:block;margin-bottom:16px}
+  .header a.back:hover{color:var(--accent)}
+  h1{font-size:clamp(24px,4vw,38px);font-weight:700;letter-spacing:-.5px;margin-bottom:10px}
+  .sub{font-size:15px;color:var(--muted);max-width:560px;margin:0 auto}
+  .cta-box{max-width:680px;margin:32px auto;padding:0 20px}
+  .cta-btn{display:block;width:100%;padding:18px;background:var(--accent);color:#fff;font-weight:700;font-size:17px;text-align:center;border-radius:14px;transition:.15s}
+  .cta-btn:hover{background:#2563eb;color:#fff}
+  .cta-btn small{display:block;font-weight:400;font-size:12px;opacity:.8;margin-top:3px}
+  .content{max-width:720px;margin:0 auto;padding:40px 20px 60px}
+  .content h2{font-size:20px;font-weight:700;margin:2rem 0 .8rem;color:var(--text)}
+  .content p{font-size:15px;color:#b0bdd4;margin-bottom:1rem;line-height:1.75}
+  .content ul{margin:.5rem 0 1rem 1.4rem;color:#b0bdd4;font-size:15px}
+  .content li{margin-bottom:.4rem}
+  .faq{border-top:1px solid var(--line);padding-top:2rem;margin-top:2rem}
+  .faq h2{font-size:22px;font-weight:700;margin-bottom:1.5rem}
+  .faq-item{border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:12px;background:var(--card)}
+  .faq-item h3{font-size:15px;font-weight:600;margin-bottom:.5rem}
+  .faq-item p{font-size:14px;color:var(--muted);margin:0}
+  .disclaimer{font-size:12px;color:var(--muted);text-align:center;padding:20px;border-top:1px solid var(--line)}
+</style>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"Is DCA a good strategy for Ethereum?","acceptedAnswer":{"@type":"Answer","text":"Yes — Ethereum's price history shows dramatic cycles. DCA lets investors accumulate ETH through downturns and benefit from recoveries without timing the market. ETH also has fundamental utility (smart contracts, DeFi, NFTs) that gives it long-term demand drivers."}},
+    {"@type":"Question","name":"How does Ethereum DCA compare to Bitcoin DCA?","acceptedAnswer":{"@type":"Answer","text":"Ethereum is generally more volatile than Bitcoin, which means both larger potential gains and larger drawdowns. ETH DCA rewards patient investors similarly to BTC DCA, but the swings are more extreme — making consistent investing even more important."}},
+    {"@type":"Question","name":"What would $100/week in Ethereum since 2020 be worth?","acceptedAnswer":{"@type":"Answer","text":"Use our calculator above for live results. ETH went from roughly $130 in early 2020 to over $4,000 in 2021, making early DCA investors substantial returns — though the 2022 bear market erased much of those gains temporarily."}},
+    {"@type":"Question","name":"Does the Ethereum DCA calculator use real prices?","acceptedAnswer":{"@type":"Answer","text":"Yes. This calculator uses real ETH/USDT daily close prices from Binance (data-api.binance.vision) to simulate exactly how a DCA strategy would have performed."}}
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="header">
+  <a href="https://cryptodcacalculator.com/" class="back">← Back to all calculators</a>
+  <h1>Ethereum DCA Calculator</h1>
+  <p class="sub">Backtest any Ethereum dollar-cost averaging strategy with real historical ETH prices. See exactly what consistent investing would have returned.</p>
+</div>
+
+<div class="cta-box">
+  <a class="cta-btn" href="https://cryptodcacalculator.com/#ethereum,weekly,100,2021-01-01,2024-01-01">
+    Calculate my Ethereum DCA returns →
+    <small>Free · Real Binance data · No sign-up required</small>
+  </a>
+</div>
+
+<div class="content">
+  <h2>Why DCA into Ethereum?</h2>
+  <p>Ethereum is the foundation of decentralized finance — smart contracts, DeFi protocols, NFTs, and layer-2 networks all rely on it. This gives ETH ongoing demand that goes beyond pure speculation. But like Bitcoin, Ethereum's price is extremely volatile, making it difficult to time your entry.</p>
+  <p>Dollar-cost averaging (DCA) solves this by removing the timing decision entirely. You invest a fixed amount — say $100 per week — regardless of whether the price is up or down. Over time, you build a position at an averaged cost that smooths out the peaks and valleys.</p>
+
+  <h2>Ethereum price cycles and DCA</h2>
+  <p>ETH has experienced some of the most dramatic price swings in crypto history:</p>
+  <ul>
+    <li><strong>2017 boom:</strong> ETH rose from ~$10 to nearly $1,400 — then crashed 95%</li>
+    <li><strong>2020–2021 bull run:</strong> ETH climbed from ~$130 to over $4,800</li>
+    <li><strong>2022 bear market:</strong> ETH fell from ~$4,800 to under $900</li>
+    <li><strong>2023–2024 recovery:</strong> ETH recovered back above $3,000</li>
+  </ul>
+  <p>Investors who DCA'd through these cycles built substantial positions at averaged prices — avoiding the catastrophic losses of buying the top with a lump sum.</p>
+
+  <h2>DCA vs lump sum for Ethereum</h2>
+  <p>In 2021, buying ETH with a lump sum in January would have looked brilliant by November — but catastrophic if you measured results in June 2022. DCA removes this variance. Our calculator shows both scenarios side by side for any date range you choose.</p>
+
+  <div class="faq">
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item">
+      <h3>Is DCA a good strategy for Ethereum?</h3>
+      <p>Historically yes — especially through ETH's 2022 crash. Investors who kept buying built a position at low prices and benefited from the subsequent recovery.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How does Ethereum DCA compare to Bitcoin DCA?</h3>
+      <p>ETH is more volatile — bigger potential upside, bigger drawdowns. Both have rewarded long-term DCA investors, but ETH's swings are more extreme.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What would $100/week in Ethereum since 2020 be worth?</h3>
+      <p>Use the calculator above for live numbers with real Binance price data. ETH's 2020–2024 window includes one of crypto's most dramatic cycles.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Does the Ethereum calculator use real prices?</h3>
+      <p>Yes — real ETH/USDT daily close prices from Binance, going back to when ETH was listed on the exchange.</p>
+    </div>
+  </div>
+</div>
+
+<p class="disclaimer">This calculator is for educational and informational purposes only. Past performance does not guarantee future results. Not financial advice. Always do your own research before investing.</p>
+
+</body>
+</html>

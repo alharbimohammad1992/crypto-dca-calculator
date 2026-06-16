@@ -280,6 +280,7 @@
       <button class="tab-btn on" data-tab="dca">📈 DCA Calculator</button>
       <button class="tab-btn" data-tab="profit">💰 Profit Calculator</button>
       <button class="tab-btn" data-tab="future">🔮 Future Value</button>
+      <button class="tab-btn" data-tab="vs">👥 You vs Friend</button>
     </div>
 
     <!-- DCA TAB -->
@@ -357,12 +358,18 @@
         <p class="verdict" id="verdict"></p>
       </div>
 
-      <button class="share-btn" id="share-btn">📊 Share my results</button>
+      <div style="display:flex;gap:10px;margin-top:14px">
+        <button class="share-btn" id="share-btn" style="flex:1;margin-top:0">📊 Share image</button>
+        <button class="share-btn" id="tweet-btn" style="flex:1;margin-top:0;background:rgba(29,161,242,.1);border-color:rgba(29,161,242,.35);color:#1da1f2">𝕏 Tweet result</button>
+      </div>
       <canvas id="share-canvas" style="display:none"></canvas>
 
       <a href="https://www.binance.com/register?ref=392703655&utm_medium=web_share_copy" target="_blank" rel="noopener" class="binance-cta">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L6 7.5 8.5 10 12 6.5 15.5 10 18 7.5 12 2Z" fill="#F0B90B"/><path d="M2 12L4.5 9.5 7 12 4.5 14.5 2 12Z" fill="#F0B90B"/><path d="M12 22L6 16.5 8.5 14 12 17.5 15.5 14 18 16.5 12 22Z" fill="#F0B90B"/><path d="M22 12L19.5 9.5 17 12 19.5 14.5 22 12Z" fill="#F0B90B"/><path d="M12 9L9 12 12 15 15 12 12 9Z" fill="#F0B90B"/></svg>
         Ready to start DCA? Open a free Binance account →
+      </a>
+      <a href="https://shop.ledger.com/pages/ledger-nano-x" target="_blank" rel="noopener" class="binance-cta" style="margin-top:10px;background:rgba(255,163,26,.07);border-color:rgba(255,163,26,.3)">
+        🔐 Secure your crypto — get a Ledger hardware wallet →
       </a>
     </div><!-- end #results -->
     </div><!-- end tab-dca -->
@@ -468,9 +475,77 @@
       </div>
     </div><!-- end tab-future -->
 
+    <!-- YOU VS FRIEND TAB -->
+    <div class="tab-panel" id="tab-vs">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:18px">See how much earlier starting matters — compare two DCA start dates for the same coin and amount.</p>
+      <div class="grid">
+        <div class="field">
+          <label for="vs-coin">Cryptocurrency</label>
+          <select id="vs-coin">
+            <option value="bitcoin">Bitcoin (BTC)</option>
+            <option value="ethereum">Ethereum (ETH)</option>
+            <option value="solana">Solana (SOL)</option>
+            <option value="binancecoin">BNB (BNB)</option>
+            <option value="ripple">XRP (XRP)</option>
+            <option value="cardano">Cardano (ADA)</option>
+            <option value="dogecoin">Dogecoin (DOGE)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="vs-amount">Amount per period ($)</label>
+          <input type="text" id="vs-amount" value="100" placeholder="100">
+        </div>
+        <div class="field">
+          <label>Frequency</label>
+          <div class="seg" id="vs-freq">
+            <button class="on" data-f="weekly">Weekly</button>
+            <button data-f="monthly">Monthly</button>
+          </div>
+        </div>
+        <div class="field">
+          <label for="vs-start-a">You started</label>
+          <input type="text" id="vs-start-a" value="2021-01-01" placeholder="YYYY-MM-DD">
+        </div>
+        <div class="field">
+          <label for="vs-start-b">Friend started</label>
+          <input type="text" id="vs-start-b" value="2020-01-01" placeholder="YYYY-MM-DD">
+        </div>
+      </div>
+      <button class="run-btn" id="vs-run">Compare →</button>
+      <p class="msg" id="vs-msg"></p>
+      <div id="vs-results" style="display:none">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px">
+          <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px">
+            <div style="font-size:12px;color:var(--muted);margin-bottom:10px;font-weight:600">YOU</div>
+            <div class="stat"><div class="k">Invested</div><div class="v" id="vs-a-invested">—</div></div>
+            <div class="stat"><div class="k">Portfolio value</div><div class="v" id="vs-a-value">—</div></div>
+            <div class="stat"><div class="k">ROI</div><div class="v" id="vs-a-roi">—</div></div>
+          </div>
+          <div style="background:var(--card);border:1px solid rgba(251,191,36,.3);border-radius:14px;padding:18px">
+            <div style="font-size:12px;color:#fbbf24;margin-bottom:10px;font-weight:600">FRIEND</div>
+            <div class="stat"><div class="k">Invested</div><div class="v" id="vs-b-invested">—</div></div>
+            <div class="stat"><div class="k">Portfolio value</div><div class="v" id="vs-b-value">—</div></div>
+            <div class="stat"><div class="k">ROI</div><div class="v" id="vs-b-roi">—</div></div>
+          </div>
+        </div>
+        <p class="verdict" id="vs-verdict"></p>
+        <a href="https://www.binance.com/register?ref=392703655&utm_medium=web_share_copy" target="_blank" rel="noopener" class="binance-cta" style="margin-top:18px">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2L6 7.5 8.5 10 12 6.5 15.5 10 18 7.5 12 2Z" fill="#F0B90B"/><path d="M2 12L4.5 9.5 7 12 4.5 14.5 2 12Z" fill="#F0B90B"/><path d="M12 22L6 16.5 8.5 14 12 17.5 15.5 14 18 16.5 12 22Z" fill="#F0B90B"/><path d="M22 12L19.5 9.5 17 12 19.5 14.5 22 12Z" fill="#F0B90B"/><path d="M12 9L9 12 12 15 15 12 12 9Z" fill="#F0B90B"/></svg>
+          Don't wait — start DCA on Binance today →
+        </a>
+      </div>
+    </div><!-- end tab-vs -->
+
   </section>
 
   <article class="content">
+    <h2>DCA calculators by coin</h2>
+    <p style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:1.5rem">
+      <a href="/bitcoin-dca-calculator/" style="background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 16px;color:var(--text);font-size:14px;font-weight:600;text-decoration:none">₿ Bitcoin DCA Calculator</a>
+      <a href="/ethereum-dca-calculator/" style="background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 16px;color:var(--text);font-size:14px;font-weight:600;text-decoration:none">⟠ Ethereum DCA Calculator</a>
+      <a href="/solana-dca-calculator/" style="background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 16px;color:var(--text);font-size:14px;font-weight:600;text-decoration:none">◎ Solana DCA Calculator</a>
+      <a href="/bnb-dca-calculator/" style="background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 16px;color:var(--text);font-size:14px;font-weight:600;text-decoration:none">⬡ BNB DCA Calculator</a>
+    </p>
     <h2>What is dollar-cost averaging (DCA)?</h2>
     <p>Dollar-cost averaging is a strategy where you invest a fixed amount on a regular schedule — for example $100 every week — regardless of the price. Instead of trying to time the market, you buy more units when prices are low and fewer when prices are high, smoothing out your average entry price over time.</p>
     <p>This DCA calculator pulls real historical prices and replays the exact strategy you describe, so you can see how a disciplined plan would actually have performed instead of guessing.</p>
@@ -649,6 +724,7 @@ function render(r){
 
   drawChart(r.curve);
   $('#results').scrollIntoView({behavior:'smooth',block:'nearest'});
+  encodeHash();
 }
 
 function drawChart(curve){
@@ -838,8 +914,40 @@ function drawFutureChart(amount, curPrice, coins, years){
   }
 }
 
-// auto-run on load with default scenario (BTC weekly from 2021)
-window.addEventListener('load', () => { run(); });
+// ── URL hash sharing ─────────────────────────────────────────────────────────
+function encodeHash(){
+  const h=[
+    $('#coin').value,
+    freq,
+    $('#amount').value,
+    $('#start').value,
+    $('#end').value
+  ].join(',');
+  history.replaceState(null,'','#'+encodeURIComponent(h));
+}
+
+function decodeHash(){
+  const raw=location.hash.slice(1);
+  if(!raw) return false;
+  try{
+    const [coin,f,amount,start,end]=decodeURIComponent(raw).split(',');
+    if(!coin||!f||!amount||!start||!end) return false;
+    $('#coin').value=coin;
+    $('#amount').value=amount;
+    [...$('#freq').children].forEach(x=>x.classList.remove('on'));
+    const fb=$('#freq').querySelector(`[data-f="${f}"]`);
+    if(fb){fb.classList.add('on');freq=f;}
+    $('#start').value=start;
+    $('#end').value=end;
+    return true;
+  }catch(e){return false;}
+}
+
+// auto-run on load — use URL hash if present, else default scenario
+window.addEventListener('load', () => {
+  decodeHash();
+  run();
+});
 
 // "What If" preset buttons
 document.querySelectorAll('.preset-btn').forEach(btn => {
@@ -937,6 +1045,75 @@ $('#share-btn').addEventListener('click', () => {
   a.download = `dca-result-${coinName.toLowerCase()}.png`;
   a.href = cv.toDataURL('image/png');
   a.click();
+});
+
+// Tweet result button
+$('#tweet-btn').addEventListener('click', () => {
+  const roi   = document.getElementById('r-roi');
+  const value = document.getElementById('r-value');
+  if (!roi || roi.textContent === '—') return;
+  const coin  = ($('#coin').value||'bitcoin');
+  const coinUp= coin.charAt(0).toUpperCase()+coin.slice(1);
+  const start = $('#start').value;
+  const end   = $('#end').value;
+  const amtRaw= $('#amount').value;
+  const text  = `I DCA'd $${amtRaw} ${freq} in ${coinUp} from ${start} to ${end} and got ${roi.textContent} ROI — portfolio now worth ${value.textContent} 📈\n\nCalculate yours 👇`;
+  const url   = 'https://cryptodcacalculator.com/#'+encodeURIComponent([$('#coin').value,freq,$('#amount').value,start,end].join(','));
+  window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(url),'_blank');
+});
+
+// ── You vs Friend tab ─────────────────────────────────────────────────────────
+let vsFreq = 'weekly';
+$('#vs-freq').addEventListener('click', e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  [...$('#vs-freq').children].forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); vsFreq=b.dataset.f;
+});
+
+$('#vs-run').addEventListener('click', async () => {
+  const msg=$('#vs-msg'); msg.style.color='var(--loss)'; msg.textContent='';
+  const coin=$('#vs-coin').value;
+  const amount=parseFloat(toLatin($('#vs-amount').value).replace(/[^0-9.]/g,''));
+  const startA=toLatin($('#vs-start-a').value).trim();
+  const startB=toLatin($('#vs-start-b').value).trim();
+  const endMs=Date.now();
+  const startAMs=Date.parse(startA), startBMs=Date.parse(startB);
+  if(!amount||amount<=0){msg.textContent='Enter a valid amount.';return;}
+  if(isNaN(startAMs)||isNaN(startBMs)){msg.textContent='Enter dates as YYYY-MM-DD.';return;}
+  const btn=$('#vs-run'); btn.disabled=true; btn.textContent='Fetching…';
+  try{
+    const minStart=Math.min(startAMs,startBMs);
+    const prices=await fetchPrices(coin,minStart,endMs);
+    const calcDCA=(fromMs)=>{
+      const buys=[];
+      const step=vsFreq==='weekly'?7*864e5:30*864e5;
+      for(let t=fromMs;t<=endMs;t+=step) buys.push(t);
+      let coins=0,invested=0;
+      buys.forEach(ts=>{const p=priceAt(prices,ts);coins+=amount/p;invested+=amount;});
+      const curP=prices[prices.length-1][1];
+      return{invested,curValue:coins*curP,roi:((coins*curP-invested)/invested)*100};
+    };
+    const a=calcDCA(startAMs), b=calcDCA(startBMs);
+    $('#vs-a-invested').textContent=fmtUSD(a.invested);
+    $('#vs-a-value').textContent=fmtUSD(a.curValue);
+    $('#vs-a-roi').textContent=fmtPct(a.roi);
+    $('#vs-a-roi').className='v '+(a.roi>=0?'pos':'neg');
+    $('#vs-b-invested').textContent=fmtUSD(b.invested);
+    $('#vs-b-value').textContent=fmtUSD(b.curValue);
+    $('#vs-b-roi').textContent=fmtPct(b.roi);
+    $('#vs-b-roi').className='v '+(b.roi>=0?'pos':'neg');
+    const diff=b.curValue-a.curValue;
+    const diffAbs=fmtUSD(Math.abs(diff));
+    const coinUp=coin.charAt(0).toUpperCase()+coin.slice(1);
+    $('#vs-verdict').innerHTML = diff>0
+      ? `Your friend started earlier and came out <b>${diffAbs} ahead</b> on ${coinUp}. Starting 1 year earlier can make a massive difference with DCA.`
+      : diff<0
+      ? `You started earlier and are <b>${diffAbs} ahead</b> of your friend. Your early discipline paid off.`
+      : 'Both strategies performed about the same over this period.';
+    $('#vs-results').style.display='block';
+    $('#vs-results').scrollIntoView({behavior:'smooth',block:'nearest'});
+  }catch(err){msg.textContent=err.message;}
+  finally{btn.disabled=false;btn.textContent='Compare →';}
 });
 </script>
 </body>

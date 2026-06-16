@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Solana DCA Calculator — Backtest SOL Dollar-Cost Averaging</title>
+<meta name="description" content="Calculate how much your Solana DCA strategy would have returned. Enter any amount, frequency, and date range — see real SOL historical results with Binance data.">
+<link rel="canonical" href="https://cryptodcacalculator.com/solana-dca-calculator/">
+<meta property="og:title" content="Solana DCA Calculator">
+<meta property="og:description" content="Backtest any Solana dollar-cost averaging strategy with real Binance price data.">
+<meta property="og:url" content="https://cryptodcacalculator.com/solana-dca-calculator/">
+<meta property="og:type" content="website">
+<link rel="icon" href="/og-image.png" type="image/png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q37F2112N1"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-Q37F2112N1');</script>
+<style>
+  :root{--bg:#07101f;--card:#0d1b2e;--text:#e8edf5;--muted:#5f7298;--accent:#3b82f6;--line:rgba(255,255,255,.09);--sans:system-ui,-apple-system,sans-serif}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  .header{text-align:center;padding:48px 20px 32px;border-bottom:1px solid var(--line)}
+  .header a.back{font-size:13px;color:var(--muted);display:block;margin-bottom:16px}
+  .header a.back:hover{color:var(--accent)}
+  h1{font-size:clamp(24px,4vw,38px);font-weight:700;letter-spacing:-.5px;margin-bottom:10px}
+  .sub{font-size:15px;color:var(--muted);max-width:560px;margin:0 auto}
+  .cta-box{max-width:680px;margin:32px auto;padding:0 20px}
+  .cta-btn{display:block;width:100%;padding:18px;background:var(--accent);color:#fff;font-weight:700;font-size:17px;text-align:center;border-radius:14px;transition:.15s}
+  .cta-btn:hover{background:#2563eb;color:#fff}
+  .cta-btn small{display:block;font-weight:400;font-size:12px;opacity:.8;margin-top:3px}
+  .content{max-width:720px;margin:0 auto;padding:40px 20px 60px}
+  .content h2{font-size:20px;font-weight:700;margin:2rem 0 .8rem;color:var(--text)}
+  .content p{font-size:15px;color:#b0bdd4;margin-bottom:1rem;line-height:1.75}
+  .content ul{margin:.5rem 0 1rem 1.4rem;color:#b0bdd4;font-size:15px}
+  .content li{margin-bottom:.4rem}
+  .faq{border-top:1px solid var(--line);padding-top:2rem;margin-top:2rem}
+  .faq h2{font-size:22px;font-weight:700;margin-bottom:1.5rem}
+  .faq-item{border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:12px;background:var(--card)}
+  .faq-item h3{font-size:15px;font-weight:600;margin-bottom:.5rem}
+  .faq-item p{font-size:14px;color:var(--muted);margin:0}
+  .disclaimer{font-size:12px;color:var(--muted);text-align:center;padding:20px;border-top:1px solid var(--line)}
+</style>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"Is Solana a good coin to DCA?","acceptedAnswer":{"@type":"Answer","text":"Solana has shown extreme volatility — crashing over 95% from its 2021 peak and then recovering strongly by 2024. DCA is particularly valuable for high-volatility assets like SOL because it prevents buying the top with a single lump sum."}},
+    {"@type":"Question","name":"What is the history of Solana's price?","acceptedAnswer":{"@type":"Answer","text":"SOL launched at around $0.50 in 2020, surged to $260 in November 2021, crashed below $10 in late 2022 (after the FTX collapse), then recovered above $200 in 2024. This dramatic cycle makes DCA highly relevant for Solana investors."}},
+    {"@type":"Question","name":"What would $100/week in Solana since 2021 be worth?","acceptedAnswer":{"@type":"Answer","text":"Use our calculator for exact live numbers. SOL's 2021–2024 journey included one of crypto's biggest crashes (FTX collapse sent it from $40 to under $10) and one of its strongest recoveries."}},
+    {"@type":"Question","name":"Does the SOL DCA calculator use real prices?","acceptedAnswer":{"@type":"Answer","text":"Yes — real SOL/USDT daily close prices from Binance, which has tracked Solana's price since its early days on the exchange."}}
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="header">
+  <a href="https://cryptodcacalculator.com/" class="back">← Back to all calculators</a>
+  <h1>Solana DCA Calculator</h1>
+  <p class="sub">Backtest any Solana dollar-cost averaging strategy with real historical SOL prices. Discover what patient, consistent investing would have returned.</p>
+</div>
+
+<div class="cta-box">
+  <a class="cta-btn" href="https://cryptodcacalculator.com/#solana,weekly,100,2021-01-01,2024-01-01">
+    Calculate my Solana DCA returns →
+    <small>Free · Real Binance data · No sign-up required</small>
+  </a>
+</div>
+
+<div class="content">
+  <h2>Solana's dramatic price history</h2>
+  <p>Solana emerged as one of the most exciting blockchains of the 2021 bull run — fast, cheap, and technically impressive. SOL rose from under $2 in early 2020 to an all-time high of $260 in November 2021. Then came one of crypto's hardest lessons.</p>
+  <p>The FTX collapse in November 2022 devastated Solana — FTX's founder Sam Bankman-Fried was one of SOL's biggest backers. The price crashed below $10. Many investors panic-sold. Those who kept DCA'ing through the crash bought large amounts of SOL at single-digit prices, and were rewarded when SOL recovered above $200 in 2024.</p>
+
+  <h2>Why DCA works especially well for Solana</h2>
+  <p>SOL is one of the most volatile major cryptocurrencies. That volatility cuts both ways — massive crashes and massive recoveries. A DCA strategy:</p>
+  <ul>
+    <li>Prevents putting all your money in at the November 2021 top</li>
+    <li>Automatically accumulates more SOL during the 2022 crash at $10–$20</li>
+    <li>Turns bear market fear into opportunity</li>
+    <li>Removes the emotional decision-making that causes most investors to buy high and sell low</li>
+  </ul>
+
+  <h2>How to use the Solana DCA calculator</h2>
+  <p>Click the button above to open the calculator pre-loaded with Solana. Set your investment amount, choose weekly or monthly frequency, pick your start date, and click Run Backtest. You'll see total invested, current portfolio value, profit/loss, and ROI — plus a chart of your portfolio's growth over time.</p>
+
+  <div class="faq">
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item">
+      <h3>Is Solana a good coin to DCA?</h3>
+      <p>It's one of the highest-risk/highest-reward options. SOL's volatility means bigger potential gains and bigger drawdowns — DCA is the sensible way to build a position.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What happened to Solana's price in 2022?</h3>
+      <p>SOL crashed from $40+ to under $10 following the FTX collapse in November 2022. It then recovered above $200 by early 2024 — one of crypto's strongest comebacks.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What would $100/week in Solana since 2021 be worth?</h3>
+      <p>Use the calculator above for live numbers. The exact figure depends on your start and end dates.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Does this calculator use real Solana prices?</h3>
+      <p>Yes — real SOL/USDT daily close prices from Binance, one of the largest and most liquid crypto exchanges.</p>
+    </div>
+  </div>
+</div>
+
+<p class="disclaimer">This calculator is for educational and informational purposes only. Past performance does not guarantee future results. Not financial advice. Always do your own research before investing.</p>
+
+</body>
+</html>
