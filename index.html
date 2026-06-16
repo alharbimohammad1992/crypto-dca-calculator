@@ -207,6 +207,17 @@
   .content .faq{border-top:1px solid var(--line);padding-top:16px;margin-top:8px}
   .content .faq h3{color:var(--text);font-size:16px;font-weight:600;margin-bottom:6px}
   .content .faq div{margin-bottom:18px}
+  /* tabs */
+  .tabs{display:flex;gap:4px;background:#0a1120;border:1px solid var(--line);border-radius:14px;padding:4px;margin-bottom:22px}
+  .tab-btn{flex:1;font-family:var(--sans);font-size:14px;font-weight:600;cursor:pointer;
+    background:transparent;color:var(--muted);border:none;border-radius:11px;padding:11px 0;transition:all .15s}
+  .tab-btn.on{background:var(--card);color:var(--text);box-shadow:0 2px 8px rgba(0,0,0,.3)}
+  .tab-panel{display:none}.tab-panel.on{display:block}
+
+  /* profit results */
+  .profit-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+  @media(max-width:640px){.profit-stats{grid-template-columns:repeat(2,1fr)}}
+
   .binance-cta{
     display:flex;align-items:center;gap:10px;justify-content:center;
     margin-top:18px;padding:15px;border-radius:13px;
@@ -233,7 +244,14 @@
     <p class="sub">See exactly what dollar-cost averaging into Bitcoin, Ethereum or any major coin would have returned — with real prices, portfolio growth, and a DCA vs lump-sum comparison.</p>
   </header>
 
-  <section class="card" aria-label="DCA calculator">
+  <section class="card" aria-label="Calculator">
+    <div class="tabs">
+      <button class="tab-btn on" data-tab="dca">📈 DCA Calculator</button>
+      <button class="tab-btn" data-tab="profit">💰 Profit Calculator</button>
+    </div>
+
+    <!-- DCA TAB -->
+    <div class="tab-panel on" id="tab-dca">
     <div class="grid">
       <div class="field">
         <label for="coin">Cryptocurrency</label>
@@ -300,7 +318,51 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L6 7.5 8.5 10 12 6.5 15.5 10 18 7.5 12 2Z" fill="#F0B90B"/><path d="M2 12L4.5 9.5 7 12 4.5 14.5 2 12Z" fill="#F0B90B"/><path d="M12 22L6 16.5 8.5 14 12 17.5 15.5 14 18 16.5 12 22Z" fill="#F0B90B"/><path d="M22 12L19.5 9.5 17 12 19.5 14.5 22 12Z" fill="#F0B90B"/><path d="M12 9L9 12 12 15 15 12 12 9Z" fill="#F0B90B"/></svg>
         Ready to start DCA? Open a free Binance account →
       </a>
-    </div>
+    </div><!-- end tab-dca -->
+
+    <!-- PROFIT TAB -->
+    <div class="tab-panel" id="tab-profit">
+      <div class="grid">
+        <div class="field">
+          <label for="p-coin">Cryptocurrency</label>
+          <select id="p-coin">
+            <option value="bitcoin">Bitcoin (BTC)</option>
+            <option value="ethereum">Ethereum (ETH)</option>
+            <option value="solana">Solana (SOL)</option>
+            <option value="binancecoin">BNB (BNB)</option>
+            <option value="ripple">XRP (XRP)</option>
+            <option value="cardano">Cardano (ADA)</option>
+            <option value="dogecoin">Dogecoin (DOGE)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="p-amount">Amount invested (USD)</label>
+          <input id="p-amount" type="text" inputmode="decimal" value="1000" dir="ltr">
+        </div>
+        <div class="field full">
+          <label for="p-date">Date of purchase <span style="opacity:.6">(YYYY-MM-DD)</span></label>
+          <input id="p-date" type="text" inputmode="numeric" value="2021-01-01" dir="ltr">
+        </div>
+      </div>
+      <button class="cta" id="p-run">Calculate Profit →</button>
+      <div class="msg" id="p-msg"></div>
+
+      <div id="p-results" style="display:none;animation:rise .5s ease both">
+        <div class="profit-stats">
+          <div class="stat"><div class="k">Invested</div><div class="v" id="p-invested">—</div></div>
+          <div class="stat"><div class="k">Current value</div><div class="v" id="p-value">—</div></div>
+          <div class="stat"><div class="k">Profit / Loss</div><div class="v" id="p-profit">—</div></div>
+          <div class="stat"><div class="k">ROI</div><div class="v" id="p-roi">—</div></div>
+          <div class="stat"><div class="k">Buy price</div><div class="v" id="p-buyprice">—</div></div>
+          <div class="stat"><div class="k">Current price</div><div class="v" id="p-curprice">—</div></div>
+        </div>
+        <a href="https://www.binance.com/register?ref=392703655&utm_medium=web_share_copy" target="_blank" rel="noopener" class="binance-cta" style="margin-top:18px">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L6 7.5 8.5 10 12 6.5 15.5 10 18 7.5 12 2Z" fill="#F0B90B"/><path d="M2 12L4.5 9.5 7 12 4.5 14.5 2 12Z" fill="#F0B90B"/><path d="M12 22L6 16.5 8.5 14 12 17.5 15.5 14 18 16.5 12 22Z" fill="#F0B90B"/><path d="M22 12L19.5 9.5 17 12 19.5 14.5 22 12Z" fill="#F0B90B"/><path d="M12 9L9 12 12 15 15 12 12 9Z" fill="#F0B90B"/></svg>
+          Ready to invest? Open a free Binance account →
+        </a>
+      </div>
+    </div><!-- end tab-profit -->
+
   </section>
 
   <article class="content">
@@ -522,6 +584,60 @@ function drawChart(curve){
   };
   line('invested','#6b7da3',false,[5,4]);
   line('value','#00e08a',true);
+}
+
+// tabs
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('on'));
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('on'));
+    btn.classList.add('on');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('on');
+  });
+});
+
+// profit calculator
+$('#p-run').addEventListener('click', runProfit);
+
+async function runProfit(){
+  const msg=$('#p-msg'); msg.style.color='var(--loss)'; msg.textContent='';
+  const amount=parseFloat(toLatin($('#p-amount').value).replace(/[^0-9.]/g,''));
+  const coin=$('#p-coin').value;
+  const dateStr=toLatin($('#p-date').value).trim();
+  const buyMs=Date.parse(dateStr);
+  const nowMs=Date.now();
+
+  if(!amount||amount<=0){msg.textContent='Enter a valid amount.';return;}
+  if(isNaN(buyMs)){msg.textContent='Enter date as YYYY-MM-DD (e.g. 2021-01-01).';return;}
+  if(buyMs>=nowMs){msg.textContent='Date must be in the past.';return;}
+
+  const btn=$('#p-run'); btn.disabled=true; btn.textContent='Fetching prices…';
+  try{
+    const prices=await fetchPrices(coin, buyMs, nowMs);
+    if(!prices.length) throw new Error('No price data for this date.');
+    const buyPrice=priceAt(prices, buyMs);
+    const curPrice=prices[prices.length-1][1];
+    const coins=amount/buyPrice;
+    const curValue=coins*curPrice;
+    const profit=curValue-amount;
+    const roi=(profit/amount)*100;
+
+    $('#p-results').style.display='block';
+    $('#p-invested').textContent=fmtUSD(amount);
+    $('#p-value').textContent=fmtUSD(curValue);
+    const pp=$('#p-profit');
+    pp.textContent=(profit>=0?'+':'')+fmtUSD(Math.abs(profit)).replace('$',profit>=0?'$':'-$');
+    pp.className='v '+(profit>=0?'pos':'neg');
+    const pr=$('#p-roi');
+    pr.textContent=fmtPct(roi); pr.className='v '+(roi>=0?'pos':'neg');
+    $('#p-buyprice').textContent='$'+buyPrice.toLocaleString('en-US',{maximumFractionDigits:2});
+    $('#p-curprice').textContent='$'+curPrice.toLocaleString('en-US',{maximumFractionDigits:2});
+    $('#p-results').scrollIntoView({behavior:'smooth',block:'nearest'});
+  }catch(err){
+    msg.textContent=err.message;
+  }finally{
+    btn.disabled=false; btn.textContent='Calculate Profit →';
+  }
 }
 
 // auto-run on load with default scenario (BTC weekly from 2021)
