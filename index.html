@@ -218,6 +218,23 @@
   .profit-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
   @media(max-width:640px){.profit-stats{grid-template-columns:repeat(2,1fr)}}
 
+  /* what-if presets */
+  .presets{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+  .preset-btn{font-family:var(--sans);font-size:12.5px;font-weight:600;cursor:pointer;
+    background:#0a1120;color:var(--muted);border:1px solid var(--line);
+    border-radius:100px;padding:7px 13px;transition:all .15s;white-space:nowrap}
+  .preset-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* share card button */
+  .share-btn{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    width:100%;margin-top:14px;padding:13px;border-radius:13px;cursor:pointer;
+    font-family:var(--sans);font-weight:700;font-size:15px;
+    background:rgba(255,255,255,.06);color:var(--text);
+    border:1px solid var(--line);transition:all .15s;
+  }
+  .share-btn:hover{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.1)}
+
   /* future table */
   .future-table{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:4px}
   .future-row{display:grid;grid-template-columns:1.4fr 1fr 1.2fr 1fr;gap:0;padding:13px 16px;font-size:14px;border-bottom:1px solid var(--line)}
@@ -267,6 +284,17 @@
 
     <!-- DCA TAB -->
     <div class="tab-panel on" id="tab-dca">
+
+    <!-- What If Presets -->
+    <div class="presets">
+      <span style="font-size:12px;color:var(--muted);align-self:center;margin-right:4px">Try:</span>
+      <button class="preset-btn" data-coin="bitcoin" data-amount="15" data-freq="monthly" data-start="2020-01-01">☕ Netflix sub ($15/mo)</button>
+      <button class="preset-btn" data-coin="bitcoin" data-amount="35" data-freq="weekly" data-start="2020-01-01">☕ Coffee money ($35/wk)</button>
+      <button class="preset-btn" data-coin="bitcoin" data-amount="100" data-freq="weekly" data-start="2020-03-20">📉 Since COVID crash</button>
+      <button class="preset-btn" data-coin="bitcoin" data-amount="100" data-freq="weekly" data-start="5y">📅 Last 5 years</button>
+      <button class="preset-btn" data-coin="ethereum" data-amount="100" data-freq="weekly" data-start="2020-01-01">⟠ ETH since 2020</button>
+    </div>
+
     <div class="grid">
       <div class="field">
         <label for="coin">Cryptocurrency</label>
@@ -328,6 +356,9 @@
         </div>
         <p class="verdict" id="verdict"></p>
       </div>
+
+      <button class="share-btn" id="share-btn">📊 Share my results</button>
+      <canvas id="share-canvas" style="display:none"></canvas>
 
       <a href="https://www.binance.com/register?ref=392703655&utm_medium=web_share_copy" target="_blank" rel="noopener" class="binance-cta">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L6 7.5 8.5 10 12 6.5 15.5 10 18 7.5 12 2Z" fill="#F0B90B"/><path d="M2 12L4.5 9.5 7 12 4.5 14.5 2 12Z" fill="#F0B90B"/><path d="M12 22L6 16.5 8.5 14 12 17.5 15.5 14 18 16.5 12 22Z" fill="#F0B90B"/><path d="M22 12L19.5 9.5 17 12 19.5 14.5 22 12Z" fill="#F0B90B"/><path d="M12 9L9 12 12 15 15 12 12 9Z" fill="#F0B90B"/></svg>
@@ -809,6 +840,104 @@ function drawFutureChart(amount, curPrice, coins, years){
 
 // auto-run on load with default scenario (BTC weekly from 2021)
 window.addEventListener('load', () => { run(); });
+
+// "What If" preset buttons
+document.querySelectorAll('.preset-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    $('#coin').value = btn.dataset.coin;
+    $('#amount').value = btn.dataset.amount;
+    [...$('#freq').children].forEach(x => x.classList.remove('on'));
+    const freqEl = $('#freq').querySelector(`[data-f="${btn.dataset.freq}"]`);
+    if (freqEl) { freqEl.classList.add('on'); freq = btn.dataset.freq; }
+    if (btn.dataset.start === '5y') {
+      const d = new Date();
+      d.setFullYear(d.getFullYear() - 5);
+      $('#start').value = d.toISOString().slice(0, 10);
+    } else {
+      $('#start').value = btn.dataset.start;
+    }
+    $('#end').value = new Date().toISOString().slice(0, 10);
+    run();
+  });
+});
+
+// Share card — draws a dark image card and triggers download
+$('#share-btn').addEventListener('click', () => {
+  const invested = document.getElementById('r-invested');
+  const value    = document.getElementById('r-value');
+  const roi      = document.getElementById('r-roi');
+  if (!invested || invested.textContent === '—') return;
+
+  const W = 1200, H = 630;
+  const cv = $('#share-canvas');
+  cv.width = W; cv.height = H;
+  const ctx = cv.getContext('2d');
+
+  // background
+  ctx.fillStyle = '#0a1120';
+  ctx.fillRect(0, 0, W, H);
+
+  // subtle grid lines
+  ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+  ctx.lineWidth = 1;
+  for (let y = 0; y <= H; y += 60) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }
+  for (let x = 0; x <= W; x += 60) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke(); }
+
+  // accent top bar
+  const grad = ctx.createLinearGradient(0, 0, W, 0);
+  grad.addColorStop(0, '#3b82f6');
+  grad.addColorStop(1, '#06b6d4');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, W, 6);
+
+  // coin label
+  const coinName = ($('#coin').value || 'Bitcoin').charAt(0).toUpperCase() + ($('#coin').value || 'Bitcoin').slice(1);
+  ctx.fillStyle = '#3b82f6';
+  ctx.font = 'bold 28px system-ui, sans-serif';
+  ctx.fillText(`${coinName} DCA Result`, 80, 100);
+
+  // big ROI
+  const roiText = roi ? roi.textContent : '';
+  ctx.fillStyle = roiText.startsWith('-') ? '#f87171' : '#4ade80';
+  ctx.font = 'bold 110px system-ui, sans-serif';
+  ctx.fillText(roiText, 80, 240);
+
+  // stats row
+  const drawStat = (label, val, x, y) => {
+    ctx.fillStyle = '#64748b';
+    ctx.font = '22px system-ui, sans-serif';
+    ctx.fillText(label, x, y);
+    ctx.fillStyle = '#f1f5f9';
+    ctx.font = 'bold 40px system-ui, sans-serif';
+    ctx.fillText(val, x, y + 50);
+  };
+  drawStat('Invested', invested ? invested.textContent : '', 80, 320);
+  drawStat('Portfolio value', value ? value.textContent : '', 400, 320);
+
+  // date range
+  const dateRange = `${$('#start').value} → ${$('#end').value}`;
+  ctx.fillStyle = '#475569';
+  ctx.font = '24px system-ui, sans-serif';
+  ctx.fillText(dateRange, 80, 460);
+
+  // site URL watermark
+  ctx.fillStyle = '#3b82f6';
+  ctx.font = 'bold 28px system-ui, sans-serif';
+  ctx.fillText('cryptodcacalculator.com', 80, 570);
+
+  // tagline right side
+  ctx.fillStyle = '#334155';
+  ctx.font = '22px system-ui, sans-serif';
+  ctx.textAlign = 'right';
+  ctx.fillText('What if you started DCA earlier?', W - 80, 570);
+  ctx.textAlign = 'left';
+
+  // download
+  const a = document.createElement('a');
+  a.download = `dca-result-${coinName.toLowerCase()}.png`;
+  a.href = cv.toDataURL('image/png');
+  a.click();
+});
 </script>
 </body>
 </html>
