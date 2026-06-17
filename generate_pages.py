@@ -25,9 +25,9 @@ NOW_MS = int(datetime(2026, 6, 17, tzinfo=timezone.utc).timestamp() * 1000)
 # ── Coins (extend this list to expand coverage) ──────────────────────────────
 COINS = {
     "bitcoin": {"symbol": "BTCUSDT", "name": "Bitcoin", "ticker": "BTC", "from_year": 2017},
-    # "ethereum": {"symbol": "ETHUSDT", "name": "Ethereum", "ticker": "ETH", "from_year": 2017},
-    # "solana":   {"symbol": "SOLUSDT", "name": "Solana",   "ticker": "SOL", "from_year": 2020},
-    # "bnb":      {"symbol": "BNBUSDT", "name": "BNB",       "ticker": "BNB", "from_year": 2017},
+    "ethereum": {"symbol": "ETHUSDT", "name": "Ethereum", "ticker": "ETH", "from_year": 2017},
+    "solana":   {"symbol": "SOLUSDT", "name": "Solana",   "ticker": "SOL", "from_year": 2021},
+    "bnb":      {"symbol": "BNBUSDT", "name": "BNB",       "ticker": "BNB", "from_year": 2018},
 }
 
 AMOUNTS = [100, 500, 1000, 5000]
@@ -43,7 +43,32 @@ YEAR_CONTEXT = {
         2022: "The reckoning. The Terra/Luna implosion and the FTX collapse dragged Bitcoin from ~$47,000 down to about $16,500 — one of the deepest bear markets crypto has seen.",
         2023: "Quiet accumulation. Recovering from the FTX lows, Bitcoin more than doubled over the year, climbing from ~$16,500 to around $42,000 as confidence slowly returned.",
         2024: "The institutional era. Spot Bitcoin ETFs were approved in January and the fourth halving arrived in April, pushing BTC past its previous all-time high and into six figures.",
-    }
+    },
+    "ethereum": {
+        2017: "The ICO boom. Ethereum powered a wave of token sales, rising from under $10 early in the year to over $700 by December as developers flocked to build on it.",
+        2018: "The crypto winter hit Ethereum hard. After peaking near $1,400 in January, ETH collapsed to around $85 by year end as the ICO bubble burst.",
+        2019: "A rebuilding year. ETH ranged between roughly $85 and $350, ending around $130 while the foundations for DeFi were quietly being laid.",
+        2020: "DeFi summer. Ethereum became the backbone of decentralized finance, climbing from ~$130 to around $740 as lending, swapping, and yield farming exploded.",
+        2021: "Peak Ethereum. Driven by the NFT and DeFi mania, ETH set an all-time high near $4,800, and the EIP-1559 upgrade began burning fees.",
+        2022: "Bear market and the Merge. Ethereum transitioned to proof-of-stake in September, but the broader downturn pulled ETH from ~$3,700 down to about $1,200.",
+        2023: "Recovery and staking growth. ETH spent the year ranging roughly $1,200 to $2,400 as staking withdrawals went live and activity returned.",
+        2024: "A new chapter. Spot Ethereum ETFs were approved and the Dencun upgrade slashed layer-2 costs, lifting ETH to new multi-year highs.",
+    },
+    "solana": {
+        2021: "Solana's breakout. SOL exploded from under $2 to an all-time high near $260, earning the 'Ethereum killer' label as its fast, cheap network drew an NFT and DeFi boom.",
+        2022: "The hardest fall. Closely tied to FTX and Alameda, Solana was hammered by the FTX collapse — SOL plunged from ~$170 to around $10, with many writing it off entirely.",
+        2023: "The great comeback. Defying the doubters, SOL surged from ~$10 to over $100 as its ecosystem rebuilt and activity returned in force.",
+        2024: "Sustained momentum. Solana rode a wave of memecoin and DeFi activity to new highs, cementing its place as a top smart-contract platform.",
+    },
+    "bnb": {
+        2018: "BNB's first full year. Despite the broader bear market, Binance's exchange token held up better than most, trading roughly between $6 and $15.",
+        2019: "Growing with Binance. As the exchange expanded, BNB climbed from around $6 to over $30, powered by token burns and exchange utility.",
+        2020: "Steady then surging. BNB spent much of the year around $15 before joining the late-year rally, ending near $37 ahead of a massive run.",
+        2021: "The BSC boom. With the rise of Binance Smart Chain, BNB exploded to an all-time high near $690 as users sought a cheaper alternative to Ethereum.",
+        2022: "Resilient in the downturn. BNB fell from ~$530 to about $240 during the bear market, but held up better than most large-cap coins.",
+        2023: "Under pressure. Amid regulatory scrutiny of Binance, BNB ranged roughly between $240 and $330 for most of the year.",
+        2024: "Market recovery. BNB rose with the broader crypto rebound as Binance Smart Chain activity picked back up.",
+    },
 }
 
 BINANCE = "https://data-api.binance.vision/api/v3/klines"
