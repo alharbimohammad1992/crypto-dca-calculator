@@ -4,7 +4,28 @@
       "Bash(git init *)",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "Bash(git config *)"
+      "Bash(git config *)",
+      "Bash(gh auth *)",
+      "Bash(Start-Process -FilePath \"gh\" -ArgumentList \"auth\",\"login\",\"--web\",\"-p\",\"https\" -RedirectStandardOutput \"C:\\\\Users\\\\96655\\\\Desktop\\\\gh_auth_out.txt\" -RedirectStandardError \"C:\\\\Users\\\\96655\\\\Desktop\\\\gh_auth_err.txt\" -WindowStyle Hidden)",
+      "Bash(Start-Sleep -Seconds 5)",
+      "Bash(Get-Content \"C:\\\\Users\\\\96655\\\\Desktop\\\\gh_auth_out.txt\" -ErrorAction SilentlyContinue)",
+      "Bash(Get-Content \"C:\\\\Users\\\\96655\\\\Desktop\\\\gh_auth_err.txt\" -ErrorAction SilentlyContinue)",
+      "mcp__Claude_in_Chrome__navigate",
+      "mcp__Claude_in_Chrome__list_connected_browsers",
+      "PowerShell(gh auth status 2>&1)",
+      "Bash(git push *)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "WebFetch(domain:data-api.binance.vision)",
+      "WebSearch",
+      "mcp__Claude_Preview__preview_start",
+      "WebFetch(domain:www.youtube.com)",
+      "mcp__visualize__read_me",
+      "mcp__visualize__show_widget",
+      "WebFetch(domain:21vox.com)",
+      "Bash(node -e ' *)",
+      "WebFetch(domain:www.quora.com)",
+      "Bash(python3 generate_pages.py)",
+      "Bash(python generate_pages.py)"
     ]
   }
 }
